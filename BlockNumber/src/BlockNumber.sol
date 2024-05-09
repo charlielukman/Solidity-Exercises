@@ -10,8 +10,11 @@ contract BlockNumber {
      */
 
     address public lastCaller;
+    uint256 public lastCalledBlock;
 
     function callMe() external {
-        /// your code here
+        require(lastCalledBlock != block.number, "Block called more than once");
+        lastCaller = msg.sender;
+        lastCalledBlock = block.number;
     }
 }
